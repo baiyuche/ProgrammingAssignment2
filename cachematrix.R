@@ -8,14 +8,14 @@
 ## Write a short comment describing this function
 ## This function creates a special "matrix" object 
 ## that can cache its inverse
-makeVector <- function(x = numeric()) {
+makeCacheMatrix <- function(x = matrix()) {
          m <- NULL
          set <- function(y) {
                  x <<- y
                  m <<- NULL
          }
          get <- function() x
-         set1 <- function() m <<- solve(x)
+         set1 <- function(inverse) m <<- inverse
          set2 <- function() m
          list(set = set, get = get,
               set1 = set1,
@@ -30,6 +30,7 @@ makeVector <- function(x = numeric()) {
 cacheSolve <- function(x, ...) {
          m <- x$obt()
          if(!is.null(m)) {
+             message("cached Data")
                  return(m)
          }
          data <- x$set1()
